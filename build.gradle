@@ -19,3 +19,9 @@ dependencies {
     compile "io.reactivex.rxjava2:rxjava:2.0.4"
     compile "me.shinn:photo_util:0.0.0-SNAPSHOT"
 }
+
+bootRun {
+    if ( project.hasProperty('dir') ) {
+        args "--me.shinn.workingDir=${project.dir}"
+    }
+}
