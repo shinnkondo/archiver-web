@@ -4,9 +4,11 @@ plugins {
 }
 
 apply plugin: 'groovy'
+apply plugin: 'maven'
 
+project.group = "me.shinn"
+project.version = '0.0.0'
 
-project.version = '0.0.0-SNAPSHOT'
 repositories {
     mavenLocal()
     mavenCentral()
@@ -14,11 +16,12 @@ repositories {
 
 dependencies {
     compile localGroovy()
+
     compile "javax.inject:javax.inject:1"
     compile("org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-websocket")
     compile "io.reactivex.rxjava2:rxjava:2.0.4"
-    compile "me.shinn:photo_util:0.0.0-SNAPSHOT"
+    compile "me.shinn:photo_util:0.0.0"
 }
 
 bootRun {
