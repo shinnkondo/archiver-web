@@ -1,10 +1,7 @@
 package me.shinn.web
 
-import com.google.inject.Guice
-import com.google.inject.Injector
 import me.shinn.download.DownloadManager
-import me.shinn.download.config.PhotoUtilModule
-import me.shinn.download.site.WebSiteModule
+import me.shinn.download.config.ModuleBundle
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
@@ -22,7 +19,6 @@ class Application {
 
     @Bean
     DownloadManager downloadManager() {
-        Injector injector = Guice.createInjector(new PhotoUtilModule(), new WebSiteModule())
-        return injector.getInstance(DownloadManager.class)
+        return ModuleBundle.injector.getInstance(DownloadManager.class)
     }
 }

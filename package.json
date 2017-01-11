@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "angular2-template-loader": "^0.6.0"
+  }
+}

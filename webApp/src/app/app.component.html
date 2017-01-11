@@ -1,0 +1,11 @@
+<h1>Hello {{name}}</h1>
+
+<label>New URL: <input #url/></label>
+<button (click)="download(url.value); url.value=''">Archive</button>
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+<ul>
+    <li *ngFor="let status of statusList">
+        {{status.id}} {{status.url}} {{status.status}}
+    </li>
+</ul>

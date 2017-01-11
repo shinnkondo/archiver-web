@@ -15,6 +15,9 @@ class ArchivableManager {
     @Inject
     DownloadManager downloadManager
 
+    @Inject
+    ArchivableUpdateHandler handler
+
     @Value('${me.shinn.workingDir}')
     String workingDir
 
@@ -25,6 +28,7 @@ class ArchivableManager {
         def a = ArchivingJob.create(url)
         jobs[a.id] = a
         c.subscribe({
+            handler.update()
             a.end()
         }, {
             a.fail()
