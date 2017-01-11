@@ -30,7 +30,7 @@ class ArchivableManager {
         return jobs[jobId].status
     }
 
-    Collection<JobStatus> queryStatus() {
+    Collection<ArchivingJob> queryStatus() {
         return jobs.values()
     }
 

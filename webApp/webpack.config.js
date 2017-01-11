@@ -20,14 +20,21 @@ module.exports = [{
     },
     module: {
         rules: [
-            { test: /\.ts$/, loader: "awesome-typescript-loader" },
+            { test: /\.ts$/, loaders: ["awesome-typescript-loader", 'angular2-template-loader'] },
             {
                 test: /\.css$/,
                 loaders: ["css-loader"]
             },
+                /* Embed files. */
+            { 
+                test: /\.(html|css)$/, 
+                loader: 'raw-loader',
+                exclude: /\.async\.(html|css)$/
+            },
+            /* Async loading. */
             {
-                test: /\.html$/,
-                loader: [ 'html-loader']
+                test: /\.async\.(html|css)$/, 
+                loaders: ['file?name=[name].[hash].[ext]', 'extract']
             }
         ]
     },
@@ -40,10 +47,10 @@ module.exports = [{
                 manifest: 'app-entry'
             }),
             // Could not make it not ignore vendor.js. Use it to copy html for now.
-            new HtmlWebpackPlugin({
-                template: 'src/index.html',
-                chunks: []
-            }),
+//            new HtmlWebpackPlugin({
+//                template: 'src/index.html',
+//                chunks: []
+//            }),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             __dirname

@@ -13,12 +13,13 @@ class ArchivableController {
 
     @GetMapping("")
     @ResponseBody
-    Collection<ArchivableRequest> list() {
+    Collection<ArchivingJob> list() {
         return manager.queryStatus()
     }
 
     @PostMapping("")
-    String post(ArchivableRequest request) {
+    @ResponseBody
+    String post(@RequestBody ArchivableRequest request) {
         return manager.run(request.url)
     }
 }

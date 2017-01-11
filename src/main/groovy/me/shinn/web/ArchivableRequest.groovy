@@ -1,6 +1,6 @@
 package me.shinn.web
 
 
-interface ArchivableRequest {
+class ArchivableRequest {
     String url
 }
