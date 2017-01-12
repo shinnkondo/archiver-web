@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
+@RequestMapping("/api")
 class StatusController {
     @RequestMapping("/status")
     @ResponseBody
     String status() {
-        return 'I am running'
+        return 'I am running.'
     }
 }
