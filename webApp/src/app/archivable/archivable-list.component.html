@@ -1,6 +1,10 @@
-<ul>
-    <li *ngFor="let status of statusList">
-        {{status.id}} {{status.url}} {{status.status}}
-    </li>
-</ul>
+<table>
+    <tr *ngFor="let status of statusList">
+        <td> {{status.id}}</td>
+        <td [ngClass]="{'running': status.status == 'RUNNING', 'failed': status.status == 'FAILED'}">
+            {{status.status}}
+        </td>
+        <td> {{status.url}}</td>
+    </tr>
+</table>
 <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>

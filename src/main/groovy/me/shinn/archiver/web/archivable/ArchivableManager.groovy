@@ -29,11 +29,13 @@ class ArchivableManager {
         Completable c = coreManager.run(url)
         def a = ArchivingJob.create(url)
         jobs[a.id] = a
+        handler.update()
         c.subscribe({
             handler.update()
             a.end()
         }, {
             a.fail()
+
         })
         return a.id
     }

@@ -1,0 +1,24 @@
+table {
+    td {
+        padding: 8px;
+        &:nth-child(odd) {
+            background-color: #eee;
+        }
+        &:nth-child(even) {
+            background-color: #fff;
+        }
+    }
+}
+
+@keyframes blink {
+  75% { opacity: 0.3; }
+}
+
+.failed {
+    color: #f44336;    
+}
+
+.running {
+    color: #42A948;
+	animation: blink 1s step-end infinite;
+}
