@@ -4,11 +4,4 @@
             [disabled]="!urlForm.form.valid">Archive
     </button>
 </form>
-
 <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
-
-<ul>
-    <li *ngFor="let status of statusList">
-        {{status.id}} {{status.url}} {{status.status}}
-    </li>
-</ul>

@@ -6,6 +6,7 @@ import { HttpModule, JsonpModule } from '@angular/http'
 import { AppComponent } from './app.component'
 
 import { ArchivableFormComponent } from './archivable/archivable-form.component'
+import { ArchivableListComponent } from './archivable/archivable-list.component'
 import { ArchiveService} from './archivable/archive.service'
 
 @NgModule({
@@ -16,7 +17,7 @@ import { ArchiveService} from './archivable/archive.service'
     JsonpModule,
   ],
   declarations: [
-    ArchivableFormComponent, AppComponent
+    ArchivableFormComponent, ArchivableListComponent, AppComponent
   ],
   providers: [ArchiveService],
   bootstrap: [AppComponent]

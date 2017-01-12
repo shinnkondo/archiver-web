@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ArchiveService} from './archive.service'
 
 @Component({
@@ -6,7 +6,7 @@ import { ArchiveService} from './archive.service'
   templateUrl: './archivable-form.component.html',
   styleUrls: ['./archivable-form.component.scss']
 })
-export class ArchivableFormComponent implements OnInit{
+export class ArchivableFormComponent {
     name = 'Angular'
     statusList: ArchiveJobStatus[]
     errorMessage: string
@@ -14,26 +14,12 @@ export class ArchivableFormComponent implements OnInit{
     
     constructor(private archiveService: ArchiveService) {}
 
-    ngOnInit() {
-        this.archiveService.connect().subscribe((message) => {
-            this.list()
-        })
-        this.list()
-    }
-
     download(url: string) {
-        this.archiveService.postArchiveJob(url).subscribe((id: string) => {
-            this.list()
-        },(error) => {
+        this.archiveService.postArchiveJob(url).subscribe((id: string) => {},
+        (error) => {
             this.errorMessage = error
         })
     }
 
-    list() {
-        this.archiveService.getArchiveJobs().subscribe((statusList: ArchiveJobStatus[]) => {
-            this.statusList = statusList
-        }, (error) => {
-            this.errorMessage = error
-        })
-    }
+
  }

@@ -1,0 +1,6 @@
+<ul>
+    <li *ngFor="let status of statusList">
+        {{status.id}} {{status.url}} {{status.status}}
+    </li>
+</ul>
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
