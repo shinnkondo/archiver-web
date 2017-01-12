@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ArchiveService} from './archive.service'
 
 @Component({
-  selector: 'my-app',
+  selector: 'archivable-form',
   templateUrl: './archivable-form.component.html',
   styleUrls: ['./archivable-form.component.scss']
 })
-export class AppComponent implements OnInit{
+export class ArchivableFormComponent implements OnInit{
     name = 'Angular'
     statusList: ArchiveJobStatus[]
     errorMessage: string
