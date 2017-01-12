@@ -1,0 +1,3 @@
+[submodule "archiver-core"]
+	path = archiver-core
+	url = ../archiver-core
