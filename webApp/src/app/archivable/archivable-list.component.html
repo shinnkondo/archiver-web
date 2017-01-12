@@ -1,10 +1,11 @@
-<table>
-    <tr *ngFor="let status of statusList">
-        <td> {{status.id}}</td>
-        <td [ngClass]="{'running': status.status == 'RUNNING', 'failed': status.status == 'FAILED'}">
-            {{status.status}}
-        </td>
-        <td> {{status.url}}</td>
-    </tr>
-</table>
+<ul class="mdc-list mdc-list--dense">
+    <li class="mdc-list-item" *ngFor="let status of statusList">
+        <span class="mdc-list-item__start-detail">
+            <i class="fa fa-lg fa-fw "
+               [ngClass]="{'fa-circle-o-notch fa-spin': status.status == 'RUNNING', 'fa-exclamation failed': status.status == 'FAILED', 'fa-check done': status.status == 'COMPLETED'}"></i>
+        </span>
+        <span>{{status.url}}</span>
+    </li>
+</ul>
+
 <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>

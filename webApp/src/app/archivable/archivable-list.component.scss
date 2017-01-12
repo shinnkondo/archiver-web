@@ -1,24 +1,15 @@
-table {
-    td {
-        padding: 8px;
-        &:nth-child(odd) {
-            background-color: #eee;
-        }
-        &:nth-child(even) {
-            background-color: #fff;
-        }
-    }
-}
-
-@keyframes blink {
-  75% { opacity: 0.3; }
-}
+@import '@material/list/mdc-list';
 
 .failed {
     color: #f44336;    
 }
 
-.running {
+.done {
     color: #42A948;
-	animation: blink 1s step-end infinite;
+}
+
+li span.mdc-list-item__start-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

@@ -21,7 +21,7 @@ export class ArchivableListComponent implements OnInit {
 
     list() {
         this.archiveService.getArchiveJobs().subscribe((statusList: ArchiveJobStatus[]) => {
-            this.statusList = statusList
+            this.statusList = statusList.reverse() // Newest first
         }, (error) => {
             this.errorMessage = error
         })

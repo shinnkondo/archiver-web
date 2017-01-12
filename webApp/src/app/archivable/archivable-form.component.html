@@ -1,7 +1,11 @@
 <form #urlForm="ngForm" class="url-input">
-    <input autofocus #url [(ngModel)]="data.url" name="name" pattern="https?://.*"/>
-    <button (click)="download(url.value); url.value=''"
-            [disabled]="!urlForm.form.valid">Archive
-    </button>
+    <div class="mdc-textfield">
+        <input class="mdc-textfield__input" autofocus #url [(ngModel)]="data.url" name="name" pattern="https?://.*"/>
+    </div>
+    <div class="center-contents">
+        <button (click)="download(url.value); url.value=''" [disabled]="!urlForm.form.valid"
+                class="mdc-button mdc-button--primary">Archive
+        </button>
+    </div>
 </form>
 <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>

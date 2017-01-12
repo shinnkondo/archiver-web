@@ -14,7 +14,7 @@ module.exports = [{
         main: './src/index.ts'
     },
     output: {
-         path: path.resolve(__dirname, '../build/resources/main/public'),
+        path: path.resolve(__dirname, '../build/resources/main/public'),
         filename: '[name].js',
         chunkFilename: '[name].js',
     },
@@ -25,33 +25,45 @@ module.exports = [{
             //     test: /\.css$/,
             //     loaders: ["css-loader"]
             // },
-                /* Embed files. */
-            { test: /\.scss$/, loaders: ["raw-loader", "sass-loader"]},
-            { 
-                test: /\.(html|css)$/, 
+            /* Embed files. */
+            {
+                test: /\.scss$/,
+                loaders: ["raw-loader", "sass-loader"]
+            },
+            {
+                test: /\.(html|css)$/,
                 loader: 'raw-loader',
                 exclude: /\.async\.(html|css)$/
             },
             /* Async loading. */
             {
-                test: /\.async\.(html|css)$/, 
+                test: /\.async\.(html|css)$/,
                 loaders: ['file?name=[name].[hash].[ext]', 'extract']
             }
         ]
     },
+
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                sassLoader: {
+                     includePaths: [path.resolve('./node_modules')]
+                },
+                context: __dirname,
+            },
+        }),
         new CheckerPlugin(),
         new SplitByPathPlugin([{
-                name: 'vendor',
-                path: path.join(__dirname, 'node_modules')
-            }], {
+            name: 'vendor',
+            path: path.join(__dirname, 'node_modules')
+        }], {
                 manifest: 'app-entry'
             }),
-            // Could not make it not ignore vendor.js. Use it to copy html for now.
-//            new HtmlWebpackPlugin({
-//                template: 'src/index.html',
-//                chunks: []
-//            }),
+        // Could not make it not ignore vendor.js. Use it to copy html for now.
+        //            new HtmlWebpackPlugin({
+        //                template: 'src/index.html',
+        //                chunks: []
+        //            }),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             __dirname
