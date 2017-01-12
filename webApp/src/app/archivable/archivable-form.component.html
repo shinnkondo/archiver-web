@@ -1,5 +1,5 @@
 <form #urlForm="ngForm" class="url-input">
-    <input #url [(ngModel)]="data.url" name="name" pattern="https?://.*"/>
+    <input autofocus #url [(ngModel)]="data.url" name="name" pattern="https?://.*"/>
     <button (click)="download(url.value); url.value=''"
             [disabled]="!urlForm.form.valid">Archive
     </button>
