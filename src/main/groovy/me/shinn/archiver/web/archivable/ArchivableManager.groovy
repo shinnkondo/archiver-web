@@ -1,10 +1,10 @@
 package me.shinn.archiver.web.archivable
 
 import io.reactivex.Completable
+import me.shinn.archiver.core.CoreManager
+import me.shinn.archiver.core.config.Pwd
 import me.shinn.archiver.web.model.ArchivingJob
 import me.shinn.archiver.web.socket.ArchivableUpdateHandler
-import me.shinn.download.DownloadManager
-import me.shinn.download.config.Pwd
 import org.springframework.beans.factory.annotation.Value
 
 import javax.annotation.PostConstruct
@@ -15,7 +15,7 @@ import javax.inject.Named
 class ArchivableManager {
 
     @Inject
-    DownloadManager downloadManager
+    CoreManager coreManager
 
     @Inject
     ArchivableUpdateHandler handler
@@ -26,7 +26,7 @@ class ArchivableManager {
     Map<String, ArchivingJob> jobs = [:].asSynchronized()
 
     String run(String url) {
-        Completable c = downloadManager.run(url)
+        Completable c = coreManager.run(url)
         def a = ArchivingJob.create(url)
         jobs[a.id] = a
         c.subscribe({

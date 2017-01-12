@@ -1,8 +1,8 @@
 package me.shinn.archiver.web
 
+import me.shinn.archiver.core.CoreManager
+import me.shinn.archiver.core.config.ModuleBundle
 import me.shinn.archiver.web.archivable.ArchivableManager
-import me.shinn.download.DownloadManager
-import me.shinn.download.config.ModuleBundle
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
@@ -19,7 +19,7 @@ class Application {
     }
 
     @Bean
-    DownloadManager downloadManager() {
-        return ModuleBundle.injector.getInstance(DownloadManager.class)
+    CoreManager coreManager() {
+        return ModuleBundle.injector.getInstance(CoreManager.class)
     }
 }

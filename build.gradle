@@ -21,7 +21,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-websocket")
     compile "io.reactivex.rxjava2:rxjava:2.0.4"
-    compile "me.shinn:photo_util:0.1.0-SNAPSHOT"
+    compile "me.shinn:archiver-core:0.1.0-SNAPSHOT"
 }
 
 bootRun {
