@@ -3,8 +3,8 @@ import { ArchiveService} from './archive.service'
 
 @Component({
   selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './archivable-form.component.html',
+  styleUrls: ['./archivable-form.component.scss']
 })
 export class AppComponent implements OnInit{
     name = 'Angular'
