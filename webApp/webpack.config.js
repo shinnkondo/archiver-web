@@ -26,6 +26,7 @@ module.exports = [{
             //     loaders: ["css-loader"]
             // },
                 /* Embed files. */
+            { test: /\.scss$/, loaders: ["raw-loader", "sass-loader"]},
             { 
                 test: /\.(html|css)$/, 
                 loader: 'raw-loader',
