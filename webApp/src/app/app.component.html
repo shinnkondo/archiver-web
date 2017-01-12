@@ -1,11 +1,18 @@
-<h1>Hello {{name}}</h1>
+<div class="main">
+    <h1>Web File Archiver</h1>
 
-<label>New URL: <input #url/></label>
-<button (click)="download(url.value); url.value=''">Archive</button>
-<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+    <form #urlForm="ngForm" class="url-input">
+        <input #url [(ngModel)]="data.url" name="name" pattern="https?://.*"/>
+        <button (click)="download(url.value); url.value=''"
+                [disabled]="!urlForm.form.valid">Archive
+        </button>
+    </form>
 
-<ul>
-    <li *ngFor="let status of statusList">
-        {{status.id}} {{status.url}} {{status.status}}
-    </li>
-</ul>
+    <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+    <ul>
+        <li *ngFor="let status of statusList">
+            {{status.id}} {{status.url}} {{status.status}}
+        </li>
+    </ul>
+</div>
