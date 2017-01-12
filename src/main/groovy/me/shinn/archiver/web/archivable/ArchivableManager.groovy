@@ -31,11 +31,12 @@ class ArchivableManager {
         jobs[a.id] = a
         handler.update()
         c.subscribe({
-            handler.update()
             a.end()
-        }, {
+            handler.update()
+        }, { e ->
             a.fail()
-
+            handler.update()
+            throw e
         })
         return a.id
     }
