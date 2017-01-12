@@ -1,4 +1,4 @@
-package me.shinn.web
+package me.shinn.archiver.web.model
 
 import java.util.concurrent.atomic.AtomicLong
 

@@ -1,4 +1,4 @@
-package me.shinn.web
+package me.shinn.archiver.web.socket
 
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketSession

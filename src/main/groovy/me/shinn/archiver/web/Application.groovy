@@ -1,5 +1,6 @@
-package me.shinn.web
+package me.shinn.archiver.web
 
+import me.shinn.archiver.web.archivable.ArchivableManager
 import me.shinn.download.DownloadManager
 import me.shinn.download.config.ModuleBundle
 import org.springframework.boot.SpringApplication

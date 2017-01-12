@@ -1,4 +1,4 @@
-package me.shinn.web
+package me.shinn.archiver.web.socket
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.EnableScheduling

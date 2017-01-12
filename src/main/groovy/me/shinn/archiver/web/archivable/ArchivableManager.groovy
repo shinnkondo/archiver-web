@@ -1,6 +1,8 @@
-package me.shinn.web
+package me.shinn.archiver.web.archivable
 
 import io.reactivex.Completable
+import me.shinn.archiver.web.model.ArchivingJob
+import me.shinn.archiver.web.socket.ArchivableUpdateHandler
 import me.shinn.download.DownloadManager
 import me.shinn.download.config.Pwd
 import org.springframework.beans.factory.annotation.Value

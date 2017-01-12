@@ -1,5 +1,7 @@
-package me.shinn.web
+package me.shinn.archiver.web.archivable
 
+import me.shinn.archiver.web.model.ArchivableRequest
+import me.shinn.archiver.web.model.ArchivingJob
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.web.bind.annotation.*

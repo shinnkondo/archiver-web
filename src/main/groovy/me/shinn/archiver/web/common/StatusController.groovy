@@ -1,4 +1,4 @@
-package me.shinn.web
+package me.shinn.archiver.web.common
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
