@@ -38,11 +38,13 @@ const plugins = [
 ];
 
 if (isProd) {
-    plugins.push(new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false
-    }))
-    plugins.push(new webpack.optimize.UglifyJsPlugin())
+    plugins = plugins.concat([
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
+        new webpack.optimize.UglifyJsPlugin()
+    ])
 }
 
 module.exports = [{
