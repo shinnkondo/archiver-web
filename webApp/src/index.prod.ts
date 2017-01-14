@@ -1,4 +1,5 @@
-import { enableProdMode } from '@angular/core';
-enableProdMode();
+import bootstrap from './main'
+import { enableProdMode } from '@angular/core'
 
-import './index'
+enableProdMode()
+bootstrap()
