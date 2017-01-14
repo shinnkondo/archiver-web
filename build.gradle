@@ -1,3 +1,4 @@
+import org.gradle.internal.os.OperatingSystem;
 
 plugins {
     id 'org.springframework.boot' version '1.4.3.RELEASE'
@@ -30,3 +31,14 @@ bootRun {
         args "--me.shinn.workingDir=${project.dir}"
     }
 }
+
+def buildCommand = ['cmd', '/c', 'npm','run', 'build']
+if (!OperatingSystem.current().isWindows()) {
+    buildCommand = buildCommand[2..-1]
+}
+task compileWebApp(type: Exec) {
+    workingDir './webApp'
+    commandLine(buildCommand)
+}
+
+bootRepackage.dependsOn(compileWebApp)
