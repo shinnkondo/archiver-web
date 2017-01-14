@@ -5,11 +5,11 @@ const path = require('path');
 const { CheckerPlugin } = require('awesome-typescript-loader')
 const SplitByPathPlugin = require('webpack-split-by-path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const plugins = [
+let plugins = [
     new ExtractTextPlugin({ filename: 'global.css', disable: false, allChunks: true }),
     new webpack.LoaderOptionsPlugin({
         options: {
@@ -26,11 +26,10 @@ const plugins = [
     }], {
             manifest: 'app-entry'
         }),
-    // Could not make it not ignore vendor.js. Use it to copy html for now.
-    //            new HtmlWebpackPlugin({
-    //                template: 'src/index.html',
-    //                chunks: []
-    //            }),
+    new HtmlWebpackPlugin({
+        template: 'src/index.html',
+        chunks: [] // Could not make it not ignore vendor.js. Use it to copy html for now.
+    }),
     new webpack.ContextReplacementPlugin(
         /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
         __dirname
