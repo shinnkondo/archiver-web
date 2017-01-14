@@ -4,7 +4,7 @@
             <i class="fa fa-lg fa-fw "
                [ngClass]="{'fa-circle-o-notch fa-spin': status.status == 'RUNNING', 'fa-exclamation failed': status.status == 'FAILED', 'fa-check done': status.status == 'COMPLETED'}"></i>
         </span>
-        <span>{{status.url}}</span>
+        <span class="center-contents"><span>{{status.url}}</span></span>
     </li>
 </ul>
 

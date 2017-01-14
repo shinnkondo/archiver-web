@@ -1,0 +1,16 @@
+@import '~purecss/build/base';
+@import '~@material/typography/mdc-typography';
+
+$fa-font-path: "~font-awesome/fonts/";
+@import '~font-awesome/scss/font-awesome';
+
+sk-archiver > .bootstrap-splash {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}

@@ -1,3 +1,5 @@
+require('./global.async.scss')
+
 import 'zone.js'
 import 'reflect-metadata'
 

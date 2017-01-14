@@ -4,7 +4,8 @@ const path = require('path');
 
 const { CheckerPlugin } = require('awesome-typescript-loader')
 const SplitByPathPlugin = require('webpack-split-by-path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = [{
     resolve: {
@@ -21,15 +22,12 @@ module.exports = [{
     module: {
         rules: [
             { test: /\.ts$/, loaders: ["awesome-typescript-loader", 'angular2-template-loader'] },
-            // {
-            //     test: /\.css$/,
-            //     loaders: ["css-loader"]
-            // },
-            /* Embed files. */
             {
                 test: /\.scss$/,
-                loaders: ["raw-loader", "sass-loader"]
+                loaders: ["raw-loader", "sass-loader"],
+                exclude: /\.async\.scss$/                
             },
+            // Loading angular template
             {
                 test: /\.(html|css)$/,
                 loader: 'raw-loader',
@@ -37,17 +35,23 @@ module.exports = [{
             },
             /* Async loading. */
             {
-                test: /\.async\.(html|css)$/,
-                loaders: ['file?name=[name].[hash].[ext]', 'extract']
-            }
+                test: /\.async\.scss$/,
+                loader: ExtractTextPlugin.extract({
+                    loader: 'css-loader!sass-loader'
+                })
+            },
+            // fonts for font awesome
+            { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
         ]
     },
 
     plugins: [
+        new ExtractTextPlugin({ filename: 'global.css', disable: false, allChunks: true }),
         new webpack.LoaderOptionsPlugin({
             options: {
                 sassLoader: {
-                     includePaths: [path.resolve('./node_modules')]
+                     includePaths: [path.resolve('./node_modules')] // So that @material/x can find sibilings
                 },
                 context: __dirname,
             },
