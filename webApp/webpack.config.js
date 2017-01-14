@@ -7,12 +7,50 @@ const SplitByPathPlugin = require('webpack-split-by-path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const isProd = process.env.NODE_ENV === 'production';
+
+const plugins = [
+    new ExtractTextPlugin({ filename: 'global.css', disable: false, allChunks: true }),
+    new webpack.LoaderOptionsPlugin({
+        options: {
+            sassLoader: {
+                includePaths: [path.resolve('./node_modules')] // So that @material/x can find sibilings
+            },
+            context: __dirname,
+        },
+    }),
+    new CheckerPlugin(),
+    new SplitByPathPlugin([{
+        name: 'vendor',
+        path: path.join(__dirname, 'node_modules')
+    }], {
+            manifest: 'app-entry'
+        }),
+    // Could not make it not ignore vendor.js. Use it to copy html for now.
+    //            new HtmlWebpackPlugin({
+    //                template: 'src/index.html',
+    //                chunks: []
+    //            }),
+    new webpack.ContextReplacementPlugin(
+        /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+        __dirname
+    ) // for angular2 to supress warning during build.
+];
+
+if (isProd) {
+    plugins.push(new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false
+    }))
+    plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
+
 module.exports = [{
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
     entry: {
-        main: './src/index.ts'
+        main: (isProd) ? './src/index.prod.ts' : './src/index.ts'
     },
     output: {
         path: path.resolve(__dirname, '../build/resources/main/public'),
@@ -22,12 +60,13 @@ module.exports = [{
     module: {
         rules: [
             { test: /\.ts$/, loaders: ["awesome-typescript-loader", 'angular2-template-loader'] },
+            // Loading angular template
             {
                 test: /\.scss$/,
                 loaders: ["raw-loader", "sass-loader"],
-                exclude: /\.async\.scss$/                
+                exclude: /\.async\.scss$/
             },
-            // Loading angular template
+
             {
                 test: /\.(html|css)$/,
                 loader: 'raw-loader',
@@ -45,35 +84,8 @@ module.exports = [{
             { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
         ]
     },
-
-    plugins: [
-        new ExtractTextPlugin({ filename: 'global.css', disable: false, allChunks: true }),
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                sassLoader: {
-                     includePaths: [path.resolve('./node_modules')] // So that @material/x can find sibilings
-                },
-                context: __dirname,
-            },
-        }),
-        new CheckerPlugin(),
-        new SplitByPathPlugin([{
-            name: 'vendor',
-            path: path.join(__dirname, 'node_modules')
-        }], {
-                manifest: 'app-entry'
-            }),
-        // Could not make it not ignore vendor.js. Use it to copy html for now.
-        //            new HtmlWebpackPlugin({
-        //                template: 'src/index.html',
-        //                chunks: []
-        //            }),
-        new webpack.ContextReplacementPlugin(
-            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-            __dirname
-        ) // for angular2 to supress warning during build.
-    ],
-    devtool: "source-map"
+    plugins: plugins,
+    devtool: (isProd) ? 'source-map' : 'cheap-module-eval-source-map'
 }
 ]
 
