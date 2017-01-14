@@ -87,7 +87,7 @@ module.exports = [{
         ]
     },
     plugins: plugins,
-    devtool: (isProd) ? 'source-map' : 'cheap-module-eval-source-map'
+    devtool: !isProd && 'cheap-module-eval-source-map'
 }
 ]
 
