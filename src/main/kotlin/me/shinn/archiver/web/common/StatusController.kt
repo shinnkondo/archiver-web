@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
 @RequestMapping("/api")
-class StatusController {
+class StatusController(val config: UserConfig) {
     @RequestMapping("/status")
     @ResponseBody
-    String status() {
-        return 'I am running.'
-    }
+    fun status() = "I am running."
 }

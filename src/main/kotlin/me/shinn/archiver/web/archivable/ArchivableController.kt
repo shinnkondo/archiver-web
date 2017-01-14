@@ -10,26 +10,20 @@ import javax.inject.Inject
 
 @RestController
 @RequestMapping("/archivable")
-class ArchivableController {
+class ArchivableController(val manager: ArchivableManager) {
 
-    @Inject
-    ArchivableManager manager
 
     @GetMapping("")
     @ResponseBody
-    Collection<ArchivingJob> list() {
-        return manager.queryStatus()
-    }
+    fun list() = manager.queryStatus()
 
     @PostMapping("")
     @ResponseBody
-    String post(@RequestBody ArchivableRequest request) {
-        return manager.run(request.url)
-    }
+    fun post(@RequestBody request: ArchivableRequest ) = manager.run(request.url)
 
     @MessageMapping("/archivable")
     @SendTo("/topic/status")
-    String statusQuery(String id) {
-
+    fun statusQuery(id: String): String {
+        throw NotImplementedError()
     }
 }

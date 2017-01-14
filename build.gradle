@@ -1,23 +1,36 @@
 import org.gradle.internal.os.OperatingSystem;
+buildscript {
 
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.6"
+    }
+}
 plugins {
     id 'org.springframework.boot' version '1.4.3.RELEASE'
 }
 
-apply plugin: 'groovy'
+
 apply plugin: 'maven'
 
+apply plugin: 'kotlin'
+
 project.group = "me.shinn"
-project.version = '0.2.0-SNAPSHOT'
+project.version = '0.3.0-SNAPSHOT'
 
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
+
 dependencies {
     compile localGroovy()
-
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.6"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.8.4"
     compile "javax.inject:javax.inject:1"
     compile("org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-websocket")
@@ -25,6 +38,8 @@ dependencies {
     compile "io.reactivex.rxjava2:rxjava:2.0.4"
     compile project(':archiver-core')
 }
+
+apply plugin: "kotlin"
 
 bootRun {
     if ( project.hasProperty('dir') ) {
@@ -36,9 +51,9 @@ def buildCommand = ['cmd', '/c', 'npm','run', 'build']
 if (!OperatingSystem.current().isWindows()) {
     buildCommand = buildCommand[2..-1]
 }
-task compileWebApp(type: Exec) {
+task transpileWebApp(type: Exec) {
     workingDir './webApp'
     commandLine(buildCommand)
 }
 
-bootRepackage.dependsOn(compileWebApp)
+bootRepackage.dependsOn(transpileWebApp)

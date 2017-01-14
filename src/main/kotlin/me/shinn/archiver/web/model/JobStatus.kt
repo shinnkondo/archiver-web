@@ -1,7 +1,7 @@
 package me.shinn.archiver.web.model
 
 
-enum JobStatus {
+enum class JobStatus {
     RUNNING,
     COMPLETED,
     FAILED

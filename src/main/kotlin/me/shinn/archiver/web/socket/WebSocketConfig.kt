@@ -11,13 +11,8 @@ import javax.inject.Inject
 @Configuration
 @EnableWebSocket
 @EnableScheduling
-class WebSocketConfig implements WebSocketConfigurer {
-
-    @Inject
-    ArchivableUpdateHandler handler
-
-    @Override
-    void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+open class WebSocketConfig (val handler: ArchivableUpdateHandler) : WebSocketConfigurer {
+    override fun registerWebSocketHandlers(registry: WebSocketHandlerRegistry) {
         registry.addHandler(handler, "/socket/archivable")
     }
 }

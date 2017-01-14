@@ -5,30 +5,22 @@ import me.shinn.archiver.core.CoreManager
 import me.shinn.archiver.core.config.Pwd
 import me.shinn.archiver.web.model.ArchivingJob
 import me.shinn.archiver.web.socket.ArchivableUpdateHandler
+import org.jetbrains.annotations.Mutable
 import org.springframework.beans.factory.annotation.Value
+import java.util.concurrent.ConcurrentHashMap
 
 import javax.annotation.PostConstruct
 import javax.inject.Inject
 import javax.inject.Named
 
 @Named
-class ArchivableManager {
+class ArchivableManager(@Inject val coreManager: CoreManager, @Inject val handler: ArchivableUpdateHandler) {
+    val jobs: MutableMap<String, ArchivingJob> = ConcurrentHashMap()
 
-    @Inject
-    CoreManager coreManager
-
-    @Inject
-    ArchivableUpdateHandler handler
-
-    @Value('${me.shinn.workingDir}')
-    String workingDir
-
-    Map<String, ArchivingJob> jobs = [:].asSynchronized()
-
-    String run(String url) {
-        Completable c = coreManager.run(url)
-        def a = ArchivingJob.create(url)
-        jobs[a.id] = a
+    fun run(url: String): String {
+        val c = coreManager.run(url)
+        val a = ArchivingJob(url)
+        jobs.put(a.id, a)
         handler.update()
         c.subscribe({
             a.end()
@@ -41,17 +33,12 @@ class ArchivableManager {
         return a.id
     }
 
-    String queryStatus(String jobId) {
-        return jobs[jobId].status
-    }
+     fun queryStatus(jobId: String): String {
+        return jobs[jobId]?.status.toString()
+     }
 
-    Collection<ArchivingJob> queryStatus() {
-        return jobs.values()
-    }
+    fun queryStatus() = jobs.values
 
-    @PostConstruct
-    private setWorkindDir() {
-        Pwd.set(workingDir)
-    }
+
 
 }
