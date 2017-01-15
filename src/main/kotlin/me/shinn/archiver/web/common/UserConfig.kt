@@ -13,6 +13,6 @@ class UserConfig(@Value("\${me.shinn.workingDir}") val workingDir: String) {
 
     @PostConstruct
     private fun setWorkindDir() {
-        Pwd.set(workingDir)
+        Pwd.setCurrentPath(workingDir)
     }
 }

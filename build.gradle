@@ -1,14 +1,15 @@
-import org.gradle.internal.os.OperatingSystem;
-buildscript {
+import org.gradle.internal.os.OperatingSystem
 
+buildscript {
+    ext.kotlinVersion='1.0.6'
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.6"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
-        classpath "org.jetbrains.kotlin:kotlin-allopen:1.0.6"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
     }
 }
 plugins {
@@ -42,7 +43,7 @@ repositories {
 
 dependencies {
     compile localGroovy()
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.6"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.8.4"
     compile "javax.inject:javax.inject:1"
     compile("org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE")
