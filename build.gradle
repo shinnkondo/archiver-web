@@ -69,7 +69,7 @@ if (!OperatingSystem.current().isWindows()) {
     buildCommand = buildCommand[2..-1]
 }
 task transpileWebApp(type: Exec) {
-    workingDir './webApp'
+    workingDir './archiver-client'
     commandLine(buildCommand)
 }
 
