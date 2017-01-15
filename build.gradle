@@ -42,7 +42,6 @@ repositories {
 
 
 dependencies {
-    compile localGroovy()
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.8.4"
     compile "javax.inject:javax.inject:1"
