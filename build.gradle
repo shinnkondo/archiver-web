@@ -76,6 +76,5 @@ task transpileWebApp(type: Exec) {
 
 bootRepackage {
     dependsOn transpileWebApp
-    mainClass = 'demo.Application'
     excludeDevtools = true
 }
