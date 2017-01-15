@@ -75,6 +75,5 @@ task transpileWebApp(type: Exec) {
 
 
 bootRepackage {
-    dependsOn transpileWebApp
     excludeDevtools = true
 }
