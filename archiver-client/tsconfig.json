@@ -2,16 +2,23 @@
   "compilerOptions": {
     "target": "es5",
     "noImplicitAny": true,
-    "skipLibCheck": true,
+    // Safer
     "strictNullChecks": true,
+    // Safer
+    "skipLibCheck": true,
     "removeComments": false,
     "sourceMap": true,
     "emitDecoratorMetadata": true,
+    // For angular2
     "experimentalDecorators": true,
+    // For angular2
     "module": "es2015",
+    // Enable tree shaking
     "moduleResolution": "node",
+    // Find node libs with "module": "es2015"
     "lib": [
       "dom",
+      // e.g. window
       "es6"
     ]
   }
