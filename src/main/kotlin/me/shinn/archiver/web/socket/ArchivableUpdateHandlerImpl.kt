@@ -7,16 +7,16 @@ import org.springframework.web.socket.handler.TextWebSocketHandler
 import javax.inject.Named
 
 @Named
-class ArchivableUpdateHandler : TextWebSocketHandler() {
+class ArchivableUpdateHandlerImpl : ArchivingJobUpdateNotifier, TextWebSocketHandler() {
     var session: WebSocketSession? = null
 
-    fun update() {
+    override fun update() {
         session?.sendMessage(TextMessage("Update available"));
     }
 
     override fun afterConnectionEstablished(session: WebSocketSession) {
         System.out.println("Connection established");
-        this.session = session;
+        this.session = session
     }
 
     override fun handleTextMessage(session: WebSocketSession, message: TextMessage) {

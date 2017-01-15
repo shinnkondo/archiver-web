@@ -9,13 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
-open class Application {
+class Application {
 
     @Bean
-    open fun coreManager() = ModuleBundle.injector.getInstance(CoreManager::class.java)
+    fun coreManager() = ModuleBundle.injector.getInstance(CoreManager::class.java)
 
     @Bean
-    open fun objectMapper() = ObjectMapper().registerModule(KotlinModule())
+    fun objectMapper() = ObjectMapper().registerModule(KotlinModule())
 
 //    For ordinary classes, annotation based configuration is used since it involves less typing for constructor based DI.
 }

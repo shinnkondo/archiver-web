@@ -7,6 +7,8 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.6"
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
+        classpath "org.jetbrains.kotlin:kotlin-allopen:1.0.6"
     }
 }
 plugins {
@@ -15,8 +17,9 @@ plugins {
 
 
 apply plugin: 'maven'
-
 apply plugin: 'kotlin'
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: "kotlin-spring"
 
 project.group = "me.shinn"
 project.version = '0.3.0-SNAPSHOT'
@@ -37,6 +40,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
     compile "io.reactivex.rxjava2:rxjava:2.0.4"
     compile project(':archiver-core')
+    testCompile group: 'org.jetbrains.spek', name: 'spek-api', version: '1.1.0-beta2'
+    testCompile "org.mockito:mockito-core:2.+"
+    testCompile "com.nhaarman:mockito-kotlin:1.1.0"
+    testRuntime group: 'org.jetbrains.spek', name: 'spek-junit-platform-engine', version: '1.1.0-beta2'
 }
 
 apply plugin: "kotlin"
