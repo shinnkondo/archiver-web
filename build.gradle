@@ -16,10 +16,20 @@ plugins {
 }
 
 
+
 apply plugin: 'maven'
 apply plugin: 'kotlin'
 apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: "kotlin-spring"
+
+junitPlatform {
+    enableStandardTestTask true
+    filters {
+        engines {
+            include 'spek'
+        }
+    }
+}
 
 project.group = "me.shinn"
 project.version = '0.3.0-SNAPSHOT'
@@ -63,4 +73,9 @@ task transpileWebApp(type: Exec) {
     commandLine(buildCommand)
 }
 
-bootRepackage.dependsOn(transpileWebApp)
+
+bootRepackage {
+    dependsOn transpileWebApp
+    mainClass = 'demo.Application'
+    excludeDevtools = true
+}
