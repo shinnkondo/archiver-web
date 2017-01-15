@@ -2,7 +2,7 @@ package me.shinn.archiver.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import me.shinn.archiver.core.CoreManager
+import me.shinn.archiver.core.CoreManagerImpl
 import me.shinn.archiver.core.config.ModuleBundle
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean
 class Application {
 
     @Bean
-    fun coreManager() = ModuleBundle.injector.getInstance(CoreManager::class.java)
+    fun coreManager() = ModuleBundle.injector.getInstance(CoreManagerImpl::class.java)
 
     @Bean
     fun objectMapper() = ObjectMapper().registerModule(KotlinModule())
