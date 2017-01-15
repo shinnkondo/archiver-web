@@ -33,7 +33,7 @@ junitPlatform {
 }
 
 project.group = "me.shinn"
-project.version = '0.3.0-SNAPSHOT'
+project.version = '0.3.0'
 
 repositories {
     mavenLocal()
