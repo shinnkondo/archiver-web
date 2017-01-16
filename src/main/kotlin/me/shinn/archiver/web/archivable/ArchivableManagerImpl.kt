@@ -19,7 +19,7 @@ class ArchivableManagerImpl(val coreManager: CoreManager, val notifier: Archivin
             a.end()
             notifier.update()
         }, { e ->
-            a.fail()
+            a.fail(e.toString())
             notifier.update()
             throw e
         })

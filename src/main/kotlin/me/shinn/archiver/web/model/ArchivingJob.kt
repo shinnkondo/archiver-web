@@ -3,7 +3,7 @@ package me.shinn.archiver.web.model
 import java.util.concurrent.atomic.AtomicLong
 
 
-data class ArchivingJob(val url: String, val id: String, var status: JobStatus) {
+data class ArchivingJob(val url: String, val id: String, var status: JobStatus, var message: String = "") {
     companion object {
         val idCounter = AtomicLong()
     }
@@ -16,6 +16,11 @@ data class ArchivingJob(val url: String, val id: String, var status: JobStatus) 
 
     fun  fail() {
         status = JobStatus.FAILED
+    }
+
+    fun fail(message: String) {
+        this.message = message
+        fail()
     }
 
 }

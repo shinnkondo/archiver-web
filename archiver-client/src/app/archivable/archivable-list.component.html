@@ -1,7 +1,8 @@
 <ul class="mdc-list mdc-list--dense">
     <li class="mdc-list-item" *ngFor="let status of statusList">
         <span class="mdc-list-item__start-detail">
-            <i class="fa fa-lg fa-fw "
+            <i class="fa fa-lg fa-fw"
+               [attr.title]="status.message"
                [ngClass]="{'fa-circle-o-notch fa-spin': status.status == 'RUNNING', 'fa-exclamation failed': status.status == 'FAILED', 'fa-check done': status.status == 'COMPLETED'}"></i>
         </span>
         <span class="center-contents"><span>{{status.url}}</span></span>
