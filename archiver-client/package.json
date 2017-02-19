@@ -1,6 +1,6 @@
 {
   "name": "Archiver",
-  "version": "0.4.1-SNAPSHOT",
+  "version": "0.4.1",
   "main": "index.js",
   "author": "Shinnosuke Kondo",
   "license": "MIT",

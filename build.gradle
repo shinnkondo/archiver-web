@@ -33,7 +33,7 @@ junitPlatform {
 }
 
 project.group = "me.shinn"
-project.version = '0.4.1-SNAPSHOT'
+project.version = '0.4.1'
 
 repositories {
     mavenLocal()
@@ -76,4 +76,8 @@ task transpileWebApp(type: Exec) {
 
 bootRepackage {
     excludeDevtools = true
+}
+
+jar {
+    classifier ''
 }
