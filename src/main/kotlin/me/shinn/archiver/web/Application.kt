@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean
 class Application {
 
     @Bean
-    fun coreManager() = ModuleBundle.injector.getInstance(CoreManager::class.java)
+    fun coreManager() = ModuleBundle.injector().getInstance(CoreManager::class.java)
 
     @Bean
     fun objectMapper() = ObjectMapper().registerModule(KotlinModule())
