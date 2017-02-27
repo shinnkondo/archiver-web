@@ -1,5 +1,6 @@
 package me.shinn.archiver.web.archivable
 
+import io.reactivex.exceptions.CompositeException
 import me.shinn.archiver.core.CoreManager
 import me.shinn.archiver.web.model.ArchivingJob
 import me.shinn.archiver.web.socket.ArchivingJobUpdateNotifier
@@ -15,13 +16,18 @@ class ArchivableManagerImpl(val coreManager: CoreManager, val notifier: Archivin
         val a = ArchivingJob(url)
         jobs.put(a.id, a)
         notifier.update()
-        c.subscribe({
+        c.subscribe({ title ->
+            a.addMessage("$title success")
+        }, { e ->
+            if (e is CompositeException) {
+                a.fail("${e.getExceptions()}")
+            } else {
+                a.fail(e.toString())
+            }
+            notifier.update()
+        }, {
             a.end()
             notifier.update()
-        }, { e ->
-            a.fail(e.toString())
-            notifier.update()
-            throw e
         })
         return a.id
     }

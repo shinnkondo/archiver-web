@@ -19,8 +19,11 @@ data class ArchivingJob(val url: String, val id: String, var status: JobStatus, 
     }
 
     fun fail(message: String) {
-        this.message = message
+        addMessage(message)
         fail()
     }
 
+    fun addMessage(message: String) {
+        this.message += "- $message\n"
+    }
 }
