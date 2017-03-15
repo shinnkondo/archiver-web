@@ -48,7 +48,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-websocket")
     compile("org.springframework.boot:spring-boot-devtools")
-    compile "io.reactivex.rxjava2:rxjava:2.0.4"
+    compile "io.reactivex.rxjava2:rxjava:2.0.6"
     compile project(':archiver-core')
     testCompile group: 'org.jetbrains.spek', name: 'spek-api', version: '1.1.0-beta2'
     testCompile "org.mockito:mockito-core:2.+"
