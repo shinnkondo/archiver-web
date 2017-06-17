@@ -4,7 +4,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Completable
+import io.reactivex.Flowable
 import me.shinn.archiver.core.CoreManager
 import me.shinn.archiver.web.socket.ArchivingJobUpdateNotifier
 import org.jetbrains.spek.api.Spek
@@ -18,7 +18,7 @@ internal class ArchivableManagerImplTest : Spek({
         val handler: ArchivingJobUpdateNotifier = mock()
         val manager = ArchivableManagerImpl(core, handler)
         on("run") {
-            whenever(core.run("url")).thenReturn(Completable.complete())
+            whenever(core.run("url")).thenReturn(Flowable.empty())
             val result = manager.run("url")
 
             it("should call core run") {
